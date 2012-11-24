@@ -90,6 +90,8 @@ public class Core implements GraylogServer {
     public static final String GRAYLOG2_VERSION = "0.10.0-rc.3";
 
     public static final String MASTER_COUNTER_NAME = "master";
+
+    public static final String THROUGHPUT_COUNTER_NAME = "throughput";
     
     private int lastReceivedMessageTimestamp = 0;
 
@@ -148,6 +150,7 @@ public class Core implements GraylogServer {
         
         messageCounterManager = new MessageCounterManagerImpl();
         messageCounterManager.register(MASTER_COUNTER_NAME);
+        messageCounterManager.register(THROUGHPUT_COUNTER_NAME);
 
         hostCounterCache = new HostCounterCacheImpl();
 
