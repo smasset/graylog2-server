@@ -102,7 +102,7 @@ public class GraphiteWriterThread implements Runnable {
             for (String metric : metrics) {
                 out.write(metric + "\n");
             }
-            
+
             out.close();
             sock.close();
         } catch (SocketException e) {

@@ -74,7 +74,7 @@ public class GraphiteFormatter extends MetricsFormatter {
 
         return r;
     }
-    
+
     private String prefix() {
         return prefix + "." + "messagecounts" + ".";
     }
