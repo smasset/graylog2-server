@@ -20,22 +20,23 @@
 
 package org.graylog2.database;
 
-import com.mongodb.BasicDBList;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBObject;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import org.graylog2.Core;
-import org.graylog2.plugin.Tools;
 import org.graylog2.activities.Activity;
 import org.graylog2.buffers.BufferWatermark;
+import org.graylog2.plugin.Counter;
+import org.graylog2.plugin.Tools;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Map;
-import java.util.Set;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBObject;
 
 
 /**
@@ -140,7 +141,7 @@ public class MongoBridge {
         coll.update(query, update, true, false);
     }
 
-    public void writeMessageCounts(int total, Map<String, Integer> streams, Map<String, Integer> hosts) {
+    public void writeMessageCounts(Counter total, Map<String, Counter> streams, Map<String, Counter> hosts) {
         // We store the first second of the current minute, to allow syncing (summing) message counts
         // from different graylog-server nodes later
         DateTime dt = new DateTime();

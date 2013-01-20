@@ -20,12 +20,15 @@
 
 package org.graylog2.metrics;
 
-import org.graylog2.plugin.Tools;
-import com.google.common.collect.Lists;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import org.graylog2.plugin.Counter;
 import org.graylog2.plugin.MessageCounter;
+import org.graylog2.plugin.Tools;
+
+import com.google.common.collect.Lists;
 
 /**
  * @author Lennart Koopmann <lennart@socketfeed.com>
@@ -52,14 +55,14 @@ public class GraphiteFormatter extends MetricsFormatter {
         r.add(overall);
 
         // Streams.
-        for(Entry<String, Integer> stream : counter.getStreamCounts().entrySet()) {
+        for(Entry<String, Counter> stream : counter.getStreamCounts().entrySet()) {
             String sval = prefix() + "streams." + buildStreamMetricName(stream.getKey(), streamNames) + " " + stream.getValue() + " " + now;
             r.add(sval);
         }
 
         // Hosts.
-        for(Entry<String, Integer> host : counter.getHostCounts().entrySet()) {
-            String hval = prefix() + "hosts." + Tools.decodeBase64(host.getKey()).replaceAll("[^a-zA-Z0-9\\.]", "") + " " + host.getValue() + " " + Tools.getUTCTimestamp();
+        for(Entry<String, Counter> host : counter.getHostCounts().entrySet()) {
+            String hval = prefix() + "hosts." + Tools.decodeBase64(host.getKey()).replaceAll("[^a-zA-Z0-9\\.]", "") + " " + host.getValue() + " " + now;
             r.add(hval);
         }
 
