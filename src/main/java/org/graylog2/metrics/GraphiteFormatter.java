@@ -35,11 +35,17 @@ import com.google.common.collect.Lists;
  */
 public class GraphiteFormatter extends MetricsFormatter {
 
+    private final Integer timestamp;
     private final MessageCounter counter;
     private final String prefix;
     private final Map<String, String> streamNames;
     
     public GraphiteFormatter(MessageCounter counter, String prefix, Map<String, String> streamNames) {
+    	this(null, counter, prefix, streamNames);
+    }
+
+    public GraphiteFormatter(Integer timestamp, MessageCounter counter, String prefix, Map<String, String> streamNames) {
+        this.timestamp = timestamp;
         this.counter = counter;
         this.prefix = prefix;
         this.streamNames = streamNames;
@@ -48,7 +54,7 @@ public class GraphiteFormatter extends MetricsFormatter {
     public List<String> getAllMetrics() {
         List<String> r = Lists.newArrayList();
 
-        int now = Tools.getUTCTimestamp();
+        int now = ((this.timestamp != null) ? this.timestamp.intValue() : Tools.getUTCTimestamp());
 
         // Overall count.
         String overall = prefix() + "total " + counter.getTotalCount() + " " + now;

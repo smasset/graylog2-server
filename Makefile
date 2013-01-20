@@ -8,8 +8,9 @@ SYSLOG4J=lib/syslog4j-0.9.46-bin.jar
 INITD=contrib/distro/generic/graylog2-server.init.d
 CONF=misc/graylog2.conf
 
-MVN_REPO="/tmp/$(NAME)-build-${USER}"
-MVN_OPTS=-Dmaven.repo.local=${MVN_REPO}
+#MVN_REPO="/tmp/$(NAME)-build-${USER}"
+#MVN_OPTS=-Dmaven.repo.local=${MVN_REPO}
+MVN_OPTS="--offline"
 
 all: $(SERVER) $(SERVER_W_DEP) prepare
 all: $(SERVER) $(SERVER_W_DEP) test
