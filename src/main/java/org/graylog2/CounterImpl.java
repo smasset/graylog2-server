@@ -24,7 +24,9 @@ import org.graylog2.plugin.Counter;
 /**
  * A counter object with synchronized writes and utility methods.
  */
-public class CounterImpl implements Counter, Comparable<Counter> {
+public class CounterImpl extends Number implements Counter, Comparable<Counter> {
+
+    private static final long serialVersionUID = 2397827853746892319L;
 
     private int count = 0;
 
@@ -41,8 +43,28 @@ public class CounterImpl implements Counter, Comparable<Counter> {
     }
 
     @Override
-    public int get() {
+    public int intValue() {
         return this.count;
+    }
+
+    @Override
+    public long longValue() {
+        return this.count;
+    }
+
+    @Override
+    public float floatValue() {
+        return this.count;
+    }
+
+    @Override
+    public double doubleValue() {
+        return this.count;
+    }
+
+    @Override
+    public int get() {
+        return this.intValue();
     }
 
     /**
